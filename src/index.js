@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios'
 import authService from './services/authorization'
+import spotifyService from './services/spotify'
 import './index.css';
 
 const AuthorizeButton = (props) => {
@@ -18,8 +19,6 @@ const AuthorizeButton = (props) => {
 }
 
 const TrackButton = (props) => {
-  console.log(props.currentTrack)
-
   return (
     <div>
       <button
@@ -35,18 +34,13 @@ const App = () => {
   const [ token, setToken ] = useState(false)
   const [ currentTrack, setCurrentTrack ] = useState({})
 
-  const baseUrl = 'https://api.spotify.com/'
-
   // Check for token on app render
   useEffect(() => {
     setToken(authService.tokenCheck())
   }, [])
 
   const updateTrack = () => {
-    const request = axios.get(`${baseUrl}v1/me/player/currently-playing`, {
-      headers: {'Authorization': `Bearer ${token}`}
-    })
-    request.then(response => setCurrentTrack(response.data.item))
+    setCurrentTrack(spotifyService.updateTrack(token))
   }
 
   return (
