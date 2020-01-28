@@ -6,9 +6,7 @@ const updateTrack = (token) => {
   const request = axios.get(`${baseUrl}v1/me/player/currently-playing`, {
     headers: {'Authorization': `Bearer ${token}`}
   })
-  request.then(response => {
-    console.log(response.data.item) // Log track
-    return response.data.item})
+  return request.then(response => response.data.item)
 }
 
 export default { updateTrack }

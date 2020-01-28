@@ -13,15 +13,19 @@ const AuthorizeButton = (props) => (
   </button>
 )
 
-const TrackButton = (props) => (
-  <div>
-    <button
-      onClick={props.handleClick}
-      >
-      Update
-    </button>
-  </div>
-)
+const TrackButton = (props) => {
+  console.log(props.currentTrack)
+
+  return (
+    <div>
+      <button
+        onClick={props.handleClick}
+        >
+        Update
+      </button>
+    </div>
+  )
+}
 
 const Player = (props) => {
   if(props.authorized === true) {
@@ -49,13 +53,17 @@ const App = () => {
   }, [])
 
   const updateTrack = () => {
-    setCurrentTrack(spotifyService.updateTrack(token))
+    spotifyService
+      .updateTrack(token)
+        .then(newTrack => setCurrentTrack(newTrack))
   }
 
   return (
     <div>
       <h1>Tabify</h1>
       <Player
+        authorized={token ? true : false}
+        currentTrack={currentTrack}
         handlTrackButtonClick={updateTrack}
         handleAuthButtonClick={authService.authorizeRedirect}
       />
