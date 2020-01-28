@@ -13,25 +13,47 @@ const AuthorizeButton = (props) => (
   </button>
 )
 
-const TrackButton = (props) => {
-  console.log(props.currentTrack)
+const UpdateButton = (props) => (
+  <button
+    onClick={props.handleClick}
+  >
+    Update
+  </button>
+)
 
-  return (
-    <div>
-      <button
-        onClick={props.handleClick}
-        >
-        Update
-      </button>
-    </div>
-  )
+const TrackInfo = (props) => {
+  if (props.playbackData === '') {
+    console.log(props.playbackData)
+    return (
+      <div>
+        <h2>No track playing</h2>
+        <UpdateButton
+          handleClick={props.updatePlaybackData}
+        />
+      </div>
+    )
+  } else {
+    console.log(props.playbackData)
+    const item = props.playbackData.item
+    return (
+      <div>
+        <h3>Listening on {props.playbackData.device.name}</h3>
+          <img src={item.album.images[0].url} alt={item.album.name}/>
+        <h3>{item.name}, by {item.artists[0].name}</h3>
+        <UpdateButton
+          handleClick={props.updatePlaybackData}
+        />
+      </div>
+    )
+  }
 }
 
 const Player = (props) => {
   if(props.authorized === true) {
     return (
-      <TrackButton
-        handleClick={props.handlTrackButtonClick}
+      <TrackInfo
+        updatePlaybackData={props.updatePlaybackData}
+        playbackData={props.playbackData}
       />
     )
   } else {
@@ -45,26 +67,26 @@ const Player = (props) => {
 
 const App = () => {
   const [ token, setToken ] = useState(false)
-  const [ currentTrack, setCurrentTrack ] = useState({})
+  const [ playbackData, setPlaybackData ] = useState('')
 
   // Check for token on app render
   useEffect(() => {
     setToken(authService.tokenCheck())
   }, [])
 
-  const updateTrack = () => {
+  const updatePlaybackData = () => {
     spotifyService
-      .updateTrack(token)
-        .then(newTrack => setCurrentTrack(newTrack))
+      .updatePlaybackData(token)
+        .then(newPlaybackData => setPlaybackData(newPlaybackData))
   }
 
   return (
     <div>
-      <h1>Tabify</h1>
+      <h1>React & Spotify!</h1>
       <Player
         authorized={token ? true : false}
-        currentTrack={currentTrack}
-        handlTrackButtonClick={updateTrack}
+        playbackData={playbackData}
+        updatePlaybackData={updatePlaybackData}
         handleAuthButtonClick={authService.authorizeRedirect}
       />
     </div>
