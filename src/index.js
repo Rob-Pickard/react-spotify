@@ -1,33 +1,42 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
-import axios from 'axios'
+// import axios from 'axios'
 import authService from './services/authorization'
 import spotifyService from './services/spotify'
 import './index.css';
 
-const AuthorizeButton = (props) => {
-  if(!props.authorized) {
+const AuthorizeButton = (props) => (
+  <button
+    onClick={props.handleClick}
+  >
+    Log in with Spotify
+  </button>
+)
+
+const TrackButton = (props) => (
+  <div>
+    <button
+      onClick={props.handleClick}
+      >
+      Update
+    </button>
+  </div>
+)
+
+const Player = (props) => {
+  if(props.authorized === true) {
     return (
-      <button
-        onClick={props.handleClick}
-        >
-        Log in with Spotify
-      </button>
+      <TrackButton
+        handleClick={props.handlTrackButtonClick}
+      />
+    )
+  } else {
+    return (
+      <AuthorizeButton
+        handleClick={props.handleAuthButtonClick}
+      />
     )
   }
-  return null
-}
-
-const TrackButton = (props) => {
-  return (
-    <div>
-      <button
-        onClick={props.handleClick}
-        >
-        Update
-      </button>
-    </div>
-  )
 }
 
 const App = () => {
@@ -46,13 +55,9 @@ const App = () => {
   return (
     <div>
       <h1>Tabify</h1>
-      <AuthorizeButton
-        handleClick={authService.authorizeRedirect}
-        authorized={token ? true : false}
-      />
-      <TrackButton
-        handleClick={updateTrack}
-        currentTrack={currentTrack}
+      <Player
+        handlTrackButtonClick={updateTrack}
+        handleAuthButtonClick={authService.authorizeRedirect}
       />
     </div>
   )
