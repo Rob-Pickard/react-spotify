@@ -3,13 +3,13 @@ import ReactDOM from 'react-dom';
 import authService from './services/authorization'
 import spotifyService from './services/spotify'
 import AuthorizePanel from './components/authorize_panel.js'
-import Player from './components/player.js'
+import PlayingConditional from './components/player.js'
 import './stylesheets/index.scss';
 
 const AuthConditional = (props) => {
   if(props.authorized) {
     return (
-      <Player
+      <PlayingConditional
         updatePlaybackData={props.updatePlaybackData}
         playbackData={props.playbackData}
         handlePlayPauseButtonClick={props.handlePlayPauseButtonClick}

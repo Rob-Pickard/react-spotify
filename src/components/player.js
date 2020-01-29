@@ -1,4 +1,30 @@
 import React from 'react';
+import blankAlbumArt from '../assets/spinning-record.gif'
+
+const PlayingConditional = (props) => {
+  if(props.playbackData === '') {
+    return (
+      <BlankPlayer
+      />
+    )
+  }
+  return (
+    <Player
+      {...props}
+    />
+  )
+}
+
+const BlankPlayer = () => (
+  <div className="blank-player">
+    <img
+      src={blankAlbumArt}
+      alt="spinning record illustration- animation"
+      className="album-art"
+    />
+  <h2>Start some music playing with Spotify on another device</h2>
+  </div>
+)
 
 const Player = (props) => (
   <div>
@@ -66,4 +92,4 @@ const UpdateButton = (props) => (
   </button>
 )
 
-export default Player
+export default PlayingConditional

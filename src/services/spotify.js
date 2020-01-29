@@ -18,7 +18,10 @@ const togglePlay = (token, isPlaying) => {
     {},
     {headers: {'Authorization': `Bearer ${token}`}
   })
-  return request.then(response => response.data)
+  return request.then(response => {
+    console.log("Pause/play response", response)
+    return response.data
+  })
 }
 
 const adjacentTrack = (token, direction) => {
