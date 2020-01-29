@@ -3,13 +3,25 @@ import axios from 'axios'
 const baseUrl = 'https://api.spotify.com/'
 
 const updatePlaybackData = (token) => {
-  const request = axios.get(`${baseUrl}v1/me/player`, {
-    headers: {'Authorization': `Bearer ${token}`}
+  const request = axios.get(`${baseUrl}v1/me/player`,
+    {headers: {'Authorization': `Bearer ${token}`}
   })
   return request.then(response => {
-    console.log("Spotify service response", response)
+    console.log("Spotify playbackData response", response)
     return response.data
   })
 }
 
-export default { updatePlaybackData }
+const togglePlay = (token, isPlaying) => {
+  const action = (isPlaying ? "pause" : "play")
+  const request = axios.put(`${baseUrl}v1/me/player/${action}`,
+    {},
+    {headers: {'Authorization': `Bearer ${token}`}
+  })
+  return request.then(response => {
+    console.log("Spotify pause response", response)
+    return response.data
+  })
+}
+
+export default { updatePlaybackData, togglePlay }

@@ -4,7 +4,7 @@ import authService from './services/authorization'
 import spotifyService from './services/spotify'
 import AuthorizePanel from './components/authorize_panel.js'
 import Player from './components/player.js'
-import './index.css';
+import './stylesheets/index.scss';
 
 const AuthConditional = (props) => {
   if(props.authorized) {
@@ -12,6 +12,7 @@ const AuthConditional = (props) => {
       <Player
         updatePlaybackData={props.updatePlaybackData}
         playbackData={props.playbackData}
+        handlePlayPauseClick={props.handlePlayPauseClick}
       />
     )
   }
@@ -41,8 +42,14 @@ const App = () => {
 
   const updatePlaybackData = () => {
     spotifyService
-    .updatePlaybackData(token)
-    .then(newPlaybackData => setPlaybackData(newPlaybackData))
+      .updatePlaybackData(token)
+        .then(newPlaybackData => setPlaybackData(newPlaybackData))
+  }
+
+  const togglePlay = () => {
+    spotifyService
+      .togglePlay(token, playbackData.is_playing)
+        .then(response => updatePlaybackData())
   }
 
   return (
@@ -53,6 +60,7 @@ const App = () => {
         handleAuthButtonClick={authService.authorizeRedirect}
         updatePlaybackData={updatePlaybackData}
         playbackData={playbackData}
+        handlePlayPauseClick={togglePlay}
       />
     </div>
   )
