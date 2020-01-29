@@ -22,8 +22,10 @@ const UpdateButton = (props) => (
 )
 
 const TrackInfo = (props) => {
-  if (props.playbackData === '') {
-    console.log(props.playbackData)
+  const playbackData = props.playbackData
+
+  if (playbackData === '') {
+    console.log(playbackData)
     return (
       <div>
         <h2>No track playing</h2>
@@ -33,11 +35,11 @@ const TrackInfo = (props) => {
       </div>
     )
   } else {
-    console.log(props.playbackData)
-    const item = props.playbackData.item
+    console.log(playbackData)
+    const item = playbackData.item
     return (
       <div>
-        <h3>Listening on {props.playbackData.device.name}</h3>
+        <h3>Listening on {playbackData.device.name}</h3>
           <img src={item.album.images[0].url} alt={item.album.name}/>
         <h3>{item.name}, by {item.artists[0].name}</h3>
         <UpdateButton
@@ -73,6 +75,15 @@ const App = () => {
   useEffect(() => {
     setToken(authService.tokenCheck())
   }, [])
+
+  // Set playback data when token recieved
+  useEffect(() => {
+    if(token ? true : false) {
+      spotifyService
+        .updatePlaybackData(token)
+          .then(newPlaybackData => setPlaybackData(newPlaybackData))
+    }
+  }, [token])
 
   const updatePlaybackData = () => {
     spotifyService
