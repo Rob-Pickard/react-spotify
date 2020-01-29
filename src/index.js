@@ -25,7 +25,6 @@ const TrackInfo = (props) => {
   const playbackData = props.playbackData
 
   if (playbackData === '') {
-    console.log(playbackData)
     return (
       <div>
         <h2>No track playing</h2>
@@ -35,7 +34,6 @@ const TrackInfo = (props) => {
       </div>
     )
   } else {
-    console.log(playbackData)
     const item = playbackData.item
     return (
       <div>
@@ -79,16 +77,15 @@ const App = () => {
   // Set playback data when token recieved
   useEffect(() => {
     if(token ? true : false) {
-      spotifyService
-        .updatePlaybackData(token)
-          .then(newPlaybackData => setPlaybackData(newPlaybackData))
+      updatePlaybackData()
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token])
 
   const updatePlaybackData = () => {
     spotifyService
-      .updatePlaybackData(token)
-        .then(newPlaybackData => setPlaybackData(newPlaybackData))
+    .updatePlaybackData(token)
+    .then(newPlaybackData => setPlaybackData(newPlaybackData))
   }
 
   return (
