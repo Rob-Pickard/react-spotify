@@ -55,11 +55,17 @@ const TrackInfo = (props) => {
     return (
       <div>
         <h3>Listening on {playbackData.device.name}</h3>
+        <a
+          href={item.album.external_urls.spotify}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <img
             src={item.album.images[0].url}
             alt={`${item.album.name}, album art`}
             className="album-art"
           />
+        </a>
         <h3>{item.name}, by {item.artists[0].name}</h3>
       </div>
     )
