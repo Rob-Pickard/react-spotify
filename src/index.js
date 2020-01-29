@@ -63,8 +63,7 @@ const App = () => {
   }
 
   return (
-    <div>
-      <h1>React & Spotify!</h1>
+    <div className="center-media-wrapper">
       <AuthConditional
         authorized={token ? true : false}
         handleAuthButtonClick={authService.authorizeRedirect}

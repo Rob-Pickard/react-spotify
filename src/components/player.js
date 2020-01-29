@@ -16,18 +16,18 @@ const PlayingConditional = (props) => {
 }
 
 const BlankPlayer = () => (
-  <div className="blank-player">
+  <div className="blank-player center-media">
     <img
       src={blankAlbumArt}
       alt="spinning record illustration- animation"
-      className="album-art"
+      className="blank-album-art album-art"
     />
-  <h2>Start some music playing with Spotify on another device</h2>
+    <h2>Start some music playing with Spotify on another device</h2>
   </div>
 )
 
 const Player = (props) => (
-  <div>
+  <div className="center-media">
     <TrackInfo
       updatePlaybackData={props.updatePlaybackData}
       playbackData={props.playbackData}
