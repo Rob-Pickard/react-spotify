@@ -57,7 +57,7 @@ const TrackInfo = (props) => {
         <h3>Listening on {playbackData.device.name}</h3>
           <img
             src={item.album.images[0].url}
-            alt={item.album.name}
+            alt={`${item.album.name}, album art`}
             className="album-art"
           />
         <h3>{item.name}, by {item.artists[0].name}</h3>
