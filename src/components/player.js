@@ -7,7 +7,9 @@ const Player = (props) => (
       playbackData={props.playbackData}
       />
     <TrackControls
-      handlePlayPauseClick={props.handlePlayPauseClick}
+      handlePlayPauseButtonClick={props.handlePlayPauseButtonClick}
+      handleNextButtonClick={props.handleNextButtonClick}
+      handlePrevButtonClick={props.handlePrevButtonClick}
       />
     <UpdateButton
       handleClick={props.updatePlaybackData}
@@ -39,11 +41,17 @@ const TrackInfo = (props) => {
 }
 
 const TrackControls = (props) => (
-  <button
-    onClick={props.handlePlayPauseClick}
-  >
-    Play/Pause
-  </button>
+  <div>
+    <button onClick={props.handlePrevButtonClick}>
+      Prev
+    </button>
+    <button onClick={props.handlePlayPauseButtonClick}>
+      Play/Pause
+    </button>
+    <button onClick={props.handleNextButtonClick}>
+      Next
+    </button>
+  </div>
 )
 
 const BlankTrackInfo = () => (

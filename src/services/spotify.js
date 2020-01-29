@@ -18,10 +18,18 @@ const togglePlay = (token, isPlaying) => {
     {},
     {headers: {'Authorization': `Bearer ${token}`}
   })
+  return request.then(response => response.data)
+}
+
+const adjacentTrack = (token, direction) => {
+  const request = axios.post(`${baseUrl}v1/me/player/${direction}`,
+    {},
+    {headers: {'Authorization': `Bearer ${token}`}
+  })
   return request.then(response => {
-    console.log("Spotify pause response", response)
+    console.log("Spotify skip response", direction, response)
     return response.data
   })
 }
 
-export default { updatePlaybackData, togglePlay }
+export default { updatePlaybackData, togglePlay, adjacentTrack }

@@ -1,5 +1,7 @@
 // Add state to auth flow for security
-const scope = 'user-read-playback-state streaming user-modify-playback-state user-read-currently-playing playlist-read-private app-remote-control user-library-read'
+const scope_arr = [ 'user-read-playback-state',
+                    'user-modify-playback-state']
+const scope = scope_arr.join(' ')
 const baseAuthUrl = 'https://accounts.spotify.com/authorize?'
 const redirectUri = 'http://localhost:3000/' // Change for production
 const clientId = process.env.REACT_APP_CLIENT_ID;

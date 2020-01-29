@@ -12,7 +12,9 @@ const AuthConditional = (props) => {
       <Player
         updatePlaybackData={props.updatePlaybackData}
         playbackData={props.playbackData}
-        handlePlayPauseClick={props.handlePlayPauseClick}
+        handlePlayPauseButtonClick={props.handlePlayPauseButtonClick}
+        handleNextButtonClick={props.handleNextButtonClick}
+        handlePrevButtonClick={props.handlePrevButtonClick}
       />
     )
   }
@@ -49,7 +51,15 @@ const App = () => {
   const togglePlay = () => {
     spotifyService
       .togglePlay(token, playbackData.is_playing)
-        .then(response => updatePlaybackData())
+        .then(response =>
+          updatePlaybackData())
+  }
+
+  const adjacentTrack = (direction) => {
+    spotifyService
+      .adjacentTrack(token, direction)
+        .then(response =>
+          updatePlaybackData())
   }
 
   return (
@@ -60,7 +70,9 @@ const App = () => {
         handleAuthButtonClick={authService.authorizeRedirect}
         updatePlaybackData={updatePlaybackData}
         playbackData={playbackData}
-        handlePlayPauseClick={togglePlay}
+        handlePlayPauseButtonClick={togglePlay}
+        handleNextButtonClick={() => adjacentTrack("next")}
+        handlePrevButtonClick={() => adjacentTrack("previous")}
       />
     </div>
   )
