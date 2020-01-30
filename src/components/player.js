@@ -1,13 +1,11 @@
 import React from 'react';
 import blankAlbumArt from '../assets/spinning-record.gif'
-import ipodIcon from '../assets/icons/ipod.png'
 
 const PlayingConditional = (props) => {
   if(props.playbackData === '') {
     return (
       <div className="player-wrapper">
-        <BlankPlayer
-        />
+        <BlankPlayer/>
       </div>
     )
   }
@@ -56,31 +54,20 @@ const Player = (props) => (
 )
 
 const TrackInfo = (props) => {
-  const playbackData = props.playbackData
-
-  if (playbackData === '') {
-    return (
-      <BlankTrackInfo/>
-    )
-  } else {
-    const item = playbackData.item
-    return (
-      <div>
-        <a
-          href={item.album.external_urls.spotify}
+  const item = props.playbackData.item
+  return (
+    <div>
+      <h1>{item.artists[0].name}</h1>
+      <h2>{item.name}</h2>
+      <a  href={item.album.external_urls.spotify}
           target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img
-            src={item.album.images[0].url}
-            alt={`${item.album.name}, album art`}
-            className="album-art"
-          />
-        </a>
-        <h3>{item.name}, by {item.artists[0].name}</h3>
-      </div>
-    )
-  }
+          rel="noopener noreferrer">
+        <img  src={item.album.images[0].url}
+              alt={`${item.album.name}, album art`}
+              className="album-art"/>
+      </a>
+    </div>
+  )
 }
 
 const TrackControls = (props) => (
@@ -97,10 +84,6 @@ const TrackControls = (props) => (
   </div>
 )
 
-const BlankTrackInfo = () => (
-  <h3>No track playing</h3>
-)
-
 const UpdateButton = (props) => (
   <button
     onClick={props.handleClick}
@@ -112,12 +95,7 @@ const UpdateButton = (props) => (
 const PlayerFooter = (props) => {
   return (
     <div className="player-footer">
-      <h3>Listening on {props.deviceName}</h3>
-      <img
-        src={ipodIcon}
-        alt="ipod classic icon"
-        id="ipod-icon"
-      />
+      <p>Listening on {props.deviceName}</p>
     </div>
   )
 }
