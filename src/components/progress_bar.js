@@ -8,13 +8,15 @@ const TrackProgressIndicator = (props) => {
   }
   const duration = millisToMinutesAndSeconds(props.playbackData.item.duration_ms)
   const progress = millisToMinutesAndSeconds(props.playbackData.progress_ms)
+  const progressBarWidth = (props.playbackData.progress_ms / props.playbackData.item.duration_ms) * 100
 
   return (
     <div className="track-progress-holder">
       <p>{progress}</p>
       <div className="track-duration-indicator">
-        <div className="track-progress-indicator-bar">
-          
+        <div
+          className="track-progress-indicator-bar"
+          style={{width: `${progressBarWidth}%`}}>
         </div>
       </div>
       <p>{duration}</p>
