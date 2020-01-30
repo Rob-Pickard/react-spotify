@@ -9,15 +9,13 @@ import './stylesheets/index.scss';
 const AuthConditional = (props) => {
   if(props.authorized) {
     return (
-      <div className="center-media-wrapper">
-        <PlayingConditional
-          updatePlaybackData={props.updatePlaybackData}
-          playbackData={props.playbackData}
-          handlePlayPauseButtonClick={props.handlePlayPauseButtonClick}
-          handleNextButtonClick={props.handleNextButtonClick}
-          handlePrevButtonClick={props.handlePrevButtonClick}
-        />
-      </div>
+      <PlayingConditional
+        updatePlaybackData={props.updatePlaybackData}
+        playbackData={props.playbackData}
+        handlePlayPauseButtonClick={props.handlePlayPauseButtonClick}
+        handleNextButtonClick={props.handleNextButtonClick}
+        handlePrevButtonClick={props.handlePrevButtonClick}
+      />
     )
   }
   return (

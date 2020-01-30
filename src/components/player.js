@@ -1,45 +1,57 @@
 import React from 'react';
 import blankAlbumArt from '../assets/spinning-record.gif'
+import ipodIcon from '../assets/icons/ipod.png'
 
 const PlayingConditional = (props) => {
   if(props.playbackData === '') {
     return (
-      <BlankPlayer
-      />
+      <div className="player-wrapper">
+        <BlankPlayer
+        />
+      </div>
     )
   }
   return (
-    <Player
-      {...props}
-    />
+    <div className="player-wrapper">
+      <Player
+        {...props}
+      />
+      <PlayerFooter
+        deviceName={props.playbackData.device.name}
+      />
+    </div>
   )
 }
 
 const BlankPlayer = () => (
-  <div className="blank-player center-media">
-    <img
-      src={blankAlbumArt}
-      alt="spinning record illustration- animation"
-      className="blank-album-art album-art"
-    />
-    <h2>Start some music playing with Spotify on another device</h2>
+  <div className="center-media-wrapper">
+    <div className="blank-player center-media">
+      <img
+        src={blankAlbumArt}
+        alt="spinning record illustration- animation"
+        className="blank-album-art album-art"
+      />
+      <h2>Start some music playing with Spotify on another device</h2>
+    </div>
   </div>
 )
 
 const Player = (props) => (
-  <div className="center-media">
-    <TrackInfo
-      updatePlaybackData={props.updatePlaybackData}
-      playbackData={props.playbackData}
-      />
-    <TrackControls
-      handlePlayPauseButtonClick={props.handlePlayPauseButtonClick}
-      handleNextButtonClick={props.handleNextButtonClick}
-      handlePrevButtonClick={props.handlePrevButtonClick}
-      />
-    <UpdateButton
-      handleClick={props.updatePlaybackData}
-      />
+  <div className="center-media-wrapper">
+    <div className="center-media">
+      <TrackInfo
+        updatePlaybackData={props.updatePlaybackData}
+        playbackData={props.playbackData}
+        />
+      <TrackControls
+        handlePlayPauseButtonClick={props.handlePlayPauseButtonClick}
+        handleNextButtonClick={props.handleNextButtonClick}
+        handlePrevButtonClick={props.handlePrevButtonClick}
+        />
+      <UpdateButton
+        handleClick={props.updatePlaybackData}
+        />
+    </div>
   </div>
 )
 
@@ -54,7 +66,6 @@ const TrackInfo = (props) => {
     const item = playbackData.item
     return (
       <div>
-        <h3>Listening on {playbackData.device.name}</h3>
         <a
           href={item.album.external_urls.spotify}
           target="_blank"
@@ -97,5 +108,18 @@ const UpdateButton = (props) => (
     Update
   </button>
 )
+
+const PlayerFooter = (props) => {
+  return (
+    <div className="player-footer">
+      <h3>Listening on {props.deviceName}</h3>
+      <img
+        src={ipodIcon}
+        alt="ipod classic icon"
+        id="ipod-icon"
+      />
+    </div>
+  )
+}
 
 export default PlayingConditional
