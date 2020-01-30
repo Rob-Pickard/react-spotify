@@ -10,10 +10,12 @@ const TrackProgressIndicator = (props) => {
   const progress = millisToMinutesAndSeconds(props.playbackData.progress_ms)
 
   return (
-    <div className="track-progress-indicator">
+    <div className="track-progress-holder">
       <p>{progress}</p>
-      <div className="track-progress-indicator-bar">
-
+      <div className="track-duration-indicator">
+        <div className="track-progress-indicator-bar">
+          
+        </div>
       </div>
       <p>{duration}</p>
     </div>
