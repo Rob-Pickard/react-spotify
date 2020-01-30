@@ -1,5 +1,9 @@
 import React from 'react';
 import blankAlbumArt from '../assets/spinning-record.gif'
+import pauseIcon from '../assets/icons/pause-icon.png'
+import playIcon from '../assets/icons/play-icon.png'
+import nextIcon from '../assets/icons/next-icon.png'
+import previousIcon from '../assets/icons/previous-icon.png'
 
 const PlayingConditional = (props) => {
   if(props.playbackData === '') {
@@ -42,6 +46,7 @@ const Player = (props) => (
         playbackData={props.playbackData}
         />
       <TrackControls
+        isPlaying={props.playbackData.is_playing}
         handlePlayPauseButtonClick={props.handlePlayPauseButtonClick}
         handleNextButtonClick={props.handleNextButtonClick}
         handlePrevButtonClick={props.handlePrevButtonClick}
@@ -56,12 +61,13 @@ const Player = (props) => (
 const TrackInfo = (props) => {
   const item = props.playbackData.item
   return (
-    <div>
+    <div className="track-info">
       <h1>{item.artists[0].name}</h1>
       <h2>{item.name}</h2>
       <a  href={item.album.external_urls.spotify}
           target="_blank"
-          rel="noopener noreferrer">
+          rel="noopener noreferrer"
+          className="album-art-a-container">
         <img  src={item.album.images[0].url}
               alt={`${item.album.name}, album art`}
               className="album-art"/>
@@ -71,16 +77,25 @@ const TrackInfo = (props) => {
 }
 
 const TrackControls = (props) => (
-  <div>
-    <button onClick={props.handlePrevButtonClick}>
-      Prev
-    </button>
-    <button onClick={props.handlePlayPauseButtonClick}>
-      Play/Pause
-    </button>
-    <button onClick={props.handleNextButtonClick}>
-      Next
-    </button>
+  <div className="track-controls">
+    <img
+      src={previousIcon}
+      alt="previous track button"
+      onClick={props.handlePrevButtonClick}
+      className="track-controls-button"
+      />
+    <img
+      src={props.isPlaying ? pauseIcon : playIcon}
+      alt="play/pause track button"
+      onClick={props.handlePlayPauseButtonClick}
+      className="track-controls-button"
+      />
+    <img
+      src={nextIcon}
+      alt="next track button"
+      onClick={props.handleNextButtonClick}
+      className="track-controls-button"
+      />
   </div>
 )
 
