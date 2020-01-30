@@ -1,4 +1,6 @@
 import React from 'react';
+import TrackProgressIndicator from './progress_bar.js'
+
 import blankAlbumArt from '../assets/spinning-record.gif'
 import pauseIcon from '../assets/icons/pause-icon.png'
 import playIcon from '../assets/icons/play-icon.png'
@@ -79,26 +81,6 @@ const TrackInfo = (props) => {
   )
 }
 
-const TrackProgressIndicator = (props) => {
-  const millisToMinutesAndSeconds = (millis)=> {
-    let minutes = Math.floor(millis / 60000);
-    let seconds = ((millis % 60000) / 1000).toFixed(0);
-    return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
-  }
-  const duration = millisToMinutesAndSeconds(props.playbackData.item.duration_ms)
-  const progress = millisToMinutesAndSeconds(props.playbackData.progress_ms)
-
-  return (
-    <div className="track-progress-indicator">
-      <p>{progress}</p>
-      <div className="track-progress-indicator-bar">
-
-      </div>
-      <p>{duration}</p>
-    </div>
-  )
-}
-
 const TrackControls = (props) => {
   return (
     <div className="track-controls">
@@ -140,4 +122,4 @@ const PlayerFooter = (props) => {
   )
 }
 
-export default PlayingConditional
+export default PlayingConditional;
