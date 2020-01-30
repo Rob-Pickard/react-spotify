@@ -44,16 +44,19 @@ const Player = (props) => (
       <TrackInfo
         updatePlaybackData={props.updatePlaybackData}
         playbackData={props.playbackData}
-        />
+      />
+      <TrackProgressIndicator
+        playbackData={props.playbackData}
+      />
       <TrackControls
         isPlaying={props.playbackData.is_playing}
         handlePlayPauseButtonClick={props.handlePlayPauseButtonClick}
         handleNextButtonClick={props.handleNextButtonClick}
         handlePrevButtonClick={props.handlePrevButtonClick}
-        />
+      />
       <UpdateButton
         handleClick={props.updatePlaybackData}
-        />
+      />
     </div>
   </div>
 )
@@ -76,28 +79,50 @@ const TrackInfo = (props) => {
   )
 }
 
-const TrackControls = (props) => (
-  <div className="track-controls">
-    <img
-      src={previousIcon}
-      alt="previous track button"
-      onClick={props.handlePrevButtonClick}
-      className="track-controls-button"
-      />
-    <img
-      src={props.isPlaying ? pauseIcon : playIcon}
-      alt="play/pause track button"
-      onClick={props.handlePlayPauseButtonClick}
-      className="track-controls-button"
-      />
-    <img
-      src={nextIcon}
-      alt="next track button"
-      onClick={props.handleNextButtonClick}
-      className="track-controls-button"
-      />
-  </div>
-)
+const TrackProgressIndicator = (props) => {
+  const millisToMinutesAndSeconds = (millis)=> {
+    let minutes = Math.floor(millis / 60000);
+    let seconds = ((millis % 60000) / 1000).toFixed(0);
+    return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+  }
+  const duration = millisToMinutesAndSeconds(props.playbackData.item.duration_ms)
+  const progress = millisToMinutesAndSeconds(props.playbackData.progress_ms)
+
+  return (
+    <div className="track-progress-indicator">
+      <p>{progress}</p>
+      <div className="track-progress-indicator-bar">
+
+      </div>
+      <p>{duration}</p>
+    </div>
+  )
+}
+
+const TrackControls = (props) => {
+  return (
+    <div className="track-controls">
+      <img
+        src={previousIcon}
+        alt="previous track button"
+        onClick={props.handlePrevButtonClick}
+        className="track-controls-button"
+        />
+      <img
+        src={props.isPlaying ? pauseIcon : playIcon}
+        alt="play/pause track button"
+        onClick={props.handlePlayPauseButtonClick}
+        className={`track-controls-button ${props.isPlaying ? "track-controls-button-pause" : "track-controls-button-play"}`}
+        />
+      <img
+        src={nextIcon}
+        alt="next track button"
+        onClick={props.handleNextButtonClick}
+        className="track-controls-button"
+        />
+    </div>
+  )
+}
 
 const UpdateButton = (props) => (
   <button
