@@ -19,6 +19,7 @@ const TrackProgressIndicator = (props) => {
         <TrackProgressBar
           progressPercent={progressPercent}
         />
+        <div className="track-progress-indicator-point"></div>
       </div>
       <p>{durationHumanized}</p>
     </div>
@@ -30,7 +31,6 @@ const TrackProgressBar = (props) => {
     <div
       className="track-progress-indicator-bar"
       style={{width: `${props.progressPercent}%`}}>
-      <div className="track-progress-indicator-point"></div>
     </div>
   )
 }
