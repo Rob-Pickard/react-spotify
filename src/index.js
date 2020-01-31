@@ -34,10 +34,16 @@ const App = () => {
     setToken(authService.tokenCheck())
   }, [])
 
-  // Set playback data when token recieved
+  // Set playback data when token recieved, refresh every ns
   useEffect(() => {
     if(token ? true : false) {
-      updatePlaybackData()
+      async function asyncUpdate() {
+        await updatePlaybackData();
+      }
+      window.setInterval(() => {
+        asyncUpdate()
+        console.log("Ticked")
+      }, 5000);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token])

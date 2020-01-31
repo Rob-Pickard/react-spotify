@@ -63,6 +63,8 @@ const Player = (props) => (
   </div>
 )
 
+
+// Memoize
 const TrackInfo = (props) => {
   const item = props.playbackData.item
   return (
@@ -81,6 +83,7 @@ const TrackInfo = (props) => {
   )
 }
 
+// Memoize
 const TrackControls = (props) => {
   return (
     <div className="track-controls">
