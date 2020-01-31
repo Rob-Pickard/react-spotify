@@ -84,7 +84,9 @@ const TrackInfo = (props) => {
 }
 
 // Memoize
-const TrackControls = (props) => {
+const TrackControls = React.memo((props) => {
+  console.log("Controls rendered")
+
   return (
     <div className="track-controls">
       <img
@@ -107,7 +109,7 @@ const TrackControls = (props) => {
         />
     </div>
   )
-}
+}, (prevProps, nextProps) => prevProps.isPlaying === nextProps.isPlaying)
 
 const UpdateButton = (props) => (
   <button
