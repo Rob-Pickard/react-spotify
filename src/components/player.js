@@ -83,10 +83,7 @@ const TrackInfo = (props) => {
   )
 }
 
-// Memoize
 const TrackControls = React.memo((props) => {
-  console.log("Controls rendered")
-
   return (
     <div className="track-controls">
       <img
@@ -119,12 +116,12 @@ const UpdateButton = (props) => (
   </button>
 )
 
-const PlayerFooter = (props) => {
+const PlayerFooter = React.memo((props) => {
   return (
     <div className="player-footer">
       <p>Listening on {props.deviceName}</p>
     </div>
   )
-}
+}, (prevProps, nextProps) => prevProps.deviceName === nextProps.deviceName)
 
 export default PlayingConditional;
