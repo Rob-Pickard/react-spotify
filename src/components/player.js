@@ -60,9 +60,7 @@ const Player = (props) => (
   </div>
 )
 
-
-// Memoize
-const TrackInfo = (props) => {
+const TrackInfo = React.memo((props) => {
   const item = props.playbackData.item
   return (
     <div className="track-info">
@@ -78,7 +76,7 @@ const TrackInfo = (props) => {
       </a>
     </div>
   )
-}
+}, (prevProps, nextProps) => prevProps.playbackData.item.name === nextProps.playbackData.item.name)
 
 const TrackControls = React.memo((props) => {
   return (
