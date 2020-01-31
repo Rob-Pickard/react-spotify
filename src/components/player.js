@@ -56,9 +56,6 @@ const Player = (props) => (
         handleNextButtonClick={props.handleNextButtonClick}
         handlePrevButtonClick={props.handlePrevButtonClick}
       />
-      <UpdateButton
-        handleClick={props.updatePlaybackData}
-      />
     </div>
   </div>
 )
@@ -107,14 +104,6 @@ const TrackControls = React.memo((props) => {
     </div>
   )
 }, (prevProps, nextProps) => prevProps.isPlaying === nextProps.isPlaying)
-
-const UpdateButton = (props) => (
-  <button
-    onClick={props.handleClick}
-  >
-    Update
-  </button>
-)
 
 const PlayerFooter = React.memo((props) => {
   return (
