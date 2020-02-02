@@ -34,7 +34,7 @@ const App = () => {
     setToken(authService.tokenCheck())
   }, [])
 
-  // Set playback data when token recieved, refresh every s
+  // Set playback data when token recieved, refresh every s if doc visible
   useEffect(() => {
     if(token ? true : false) {
       async function asyncUpdate() {
