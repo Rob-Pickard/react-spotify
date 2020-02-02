@@ -41,7 +41,9 @@ const App = () => {
         await updatePlaybackData();
       }
       window.setInterval(() => {
-        asyncUpdate()
+        if(document.hidden === false) {
+          asyncUpdate()
+        }
       }, 1000);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
