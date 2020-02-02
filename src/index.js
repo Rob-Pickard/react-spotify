@@ -34,14 +34,16 @@ const App = () => {
     setToken(authService.tokenCheck())
   }, [])
 
-  // Set playback data when token recieved, refresh every s
+  // Set playback data when token recieved, refresh every s if doc visible
   useEffect(() => {
     if(token ? true : false) {
       async function asyncUpdate() {
         await updatePlaybackData();
       }
       window.setInterval(() => {
-        asyncUpdate()
+        if(document.hidden === false) {
+          asyncUpdate()
+        }
       }, 1000);
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
