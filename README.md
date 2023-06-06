@@ -1,3 +1,7 @@
+![login screenshot](https://github.com/Rob-Pickard/react-spotify/assets/46201014/e9a78966-5164-4857-a25b-1b5510b47eb0)
+
+<img width="1383" alt="Player Screenshot" src="https://github.com/Rob-Pickard/react-spotify/assets/46201014/e97f0c03-f6f6-4445-a2e2-79b3fc70fe46">
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
